@@ -1,0 +1,201 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+}
+.wrapper-admin {
+    display: flex;
+
+    min-height: calc(100vh - 64px);
+}
+.wrapper-admin__content {
+    width: 100%;
+}
+.header-admin {
+    background: var(--dark-block-background);
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 10px;
+}
+.header-admin__control {
+    display: flex;
+}
+.header-admin__control .username {
+    color: var(--h-color);
+    font-family: var(--font-family-header);
+    margin-right: 10px;
+}
+.header-admin__control .username span {
+    color: var(--link-color);
+}
+.header-admin__control .links a {
+    color: var(--h-color);
+    text-decoration: none;
+}
+.admin-sidebar {
+    width: 100%;
+    max-width: 314px;
+    flex-shrink: 0;
+    background: var(--block-background);
+}
+.admin-sidebar .btn {
+    display: block;
+    margin: 20px 20px 20px 20px;
+}
+.admin-sidebar__list {
+    list-style: none;
+}
+.admin-sidebar__list a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--h-color);
+    font-size: 20px;
+    text-decoration: none;
+}
+.admin-sidebar__list a:hover,
+.admin-sidebar__list a.active {
+    background: #ffffff2e;
+}
+.admin-sidebar__list a i {
+    width: 34px;
+}
+.admin-sidebar__list a span {
+    background: #f00;
+    padding: 2px 7px;
+    font-size: 15px;
+    border-radius: 100%;
+}
+.admin-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1100px;
+    padding: 22px 30px;
+}
+.admin-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.admin-container section {
+    margin-bottom: 25px;
+}
+#dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.dashboard-stats__item {
+    display: flex;
+    align-items: center;
+
+    color: var(--h-color);
+    background: var(--block-background);
+    border-radius: 5px;
+    padding: 12px 20px;
+}
+.dashboard-stats__item .icon {
+    font-size: 36px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+.dashboard-stats__item .value {
+    font-size: 24px;
+    font-weight: 700;
+}
+.dashboard-stats__item.top-sales .icon {
+    color: #FF7B00;
+}
+.dashboard-stats__item.new-users .icon {
+    color: #00A3E8;
+}
+.dashboard-stats__item.orders .icon {
+    color: #BA00E8;
+}
+.dashboard-stats__item.profit .icon {
+    color: #00E842;
+}
+
+#quicktools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 22px;
+    background: var(--block-background);
+    border-radius: 5px;
+}
+.admin-table {
+    color: var(--h-color);
+
+    margin-bottom: 15px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.admin-table thead {
+    background: var(--block-background);
+}
+.admin-table td,
+.admin-table th {
+    padding: 15px 10px;
+}
+.admin-block__content .admin-block__table {
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.admin-table tbody tr:nth-child(odd),
+.admin-block__table .row:nth-child(odd) {
+    background: #5B5B5B;
+}
+.admin-table tbody tr:nth-child(even),
+.admin-block__table .row:nth-child(even) {
+    background: #767676;
+}
+.admin-block__table {
+    color: var(--h-color);
+}
+.admin-block__table .row {
+    display: flex;
+    justify-content: space-between;
+}
+.admin-single {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+}
+.admin-block {
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid var(--block-background);
+    margin-bottom: 20px;
+}
+.admin-block__content {
+    padding: 10px;
+}
+.admin-block__title {
+    font-size: 18px;
+    font-family: var(--font-family-header);
+    background: var(--block-background);
+    padding: 10px 10px;
+    color: var(--h-color);
+}
+.admin-block__table .row {
+    padding: 10px;
+}
+.admin-container.delete {
+    text-align: center;
+}
+.admin-container.delete .meta-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.admin-container.delete .btn-control {
+    justify-content: space-around;
+}
