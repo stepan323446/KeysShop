@@ -33,7 +33,7 @@
                             <a href="#">My orders</a>
                         </li>
                         <li>
-                            <a href="#">My wishlist</a>
+                            <a href="<?php the_permalink('users:wishlist') ?>">My wishlist</a>
                         </li>
                     </ul>
                 </nav>

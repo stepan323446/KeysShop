@@ -85,6 +85,7 @@ class ProductModel extends BaseModel {
     public $field_image_url;
     public $field_original_url;
     public $field_original_price = 0;
+    public $field_edition = 'Standart edition';
     public $field_created_at;
     public $field_updated_at;
     public $field_platform_id;
@@ -95,6 +96,7 @@ class ProductModel extends BaseModel {
     public $keys_count;
     public $current_price;
     public $min_price;
+    public $result_price;
 
     // Join taxonomies table
     public $platform_title;
@@ -116,6 +118,7 @@ class ProductModel extends BaseModel {
         'image_url'  => 'string',
         'original_url' => 'string',
         'original_price' => 'float',
+        'edition'   =>  'string',
         'sales'     => 'int',
 
         'created_at' => 'DateTime',
@@ -128,7 +131,16 @@ class ProductModel extends BaseModel {
             "field"         => [
                 "COUNT(CASE WHEN tb1.order_id IS NULL THEN tb1.id ELSE NULL END) AS keys_count",
                 "ROUND(MIN(CASE WHEN tb1.order_id IS NULL THEN tb1.price ELSE NULL END), 2) AS current_price",
-                "MIN(tb1.price) AS min_price"
+                "MIN(tb1.price) AS min_price",
+                "CASE
+                    WHEN COUNT(CASE WHEN tb1.order_id IS NULL THEN tb1.id ELSE NULL END) > 0 THEN
+                        ROUND(MIN(CASE WHEN tb1.order_id IS NULL THEN tb1.price ELSE NULL END), 2)
+                    ELSE
+                        CASE
+                            WHEN MIN(tb1.price) IS NULL THEN obj.original_price
+                            ELSE MIN(tb1.price)
+                        END
+                END AS result_price"
             ],
             "join_table"    => "product_keys tb1 ON tb1.product_id = obj.id"
         ],
@@ -159,13 +171,7 @@ class ProductModel extends BaseModel {
         return $add_fields;
     }
     public function get_price() {
-        if($this->is_available())
-            return $this->current_price;
-        else
-            if($this->min_price === null)
-                return $this->field_original_price;
-            else
-                return $this->min_price;
+        return round($this->result_price, 2);
     }
     public function is_available() {
         if($this->keys_count > 0)
@@ -178,6 +184,13 @@ class ProductModel extends BaseModel {
             return 0;
 
         return (int)(100 - $this->get_price() * 100 / $this->field_original_price);
+    }
+    public function get_description() {
+        $descpr = $this->field_description;
+
+        $descpr = str_replace("\n", "<br>", $descpr);
+
+        return $descpr;
     }
     public function get_price_format() {
         return number_format($this->get_price(), 2);
@@ -192,7 +205,7 @@ class ProductModel extends BaseModel {
             return $this->get_poster_url();
     }
     public function get_absolute_url() {
-        return '';
+        return get_permalink('products:single', [$this->field_slug]);
     }
 
     public static function init_table() {
@@ -207,6 +220,7 @@ class ProductModel extends BaseModel {
             description TEXT NOT NULL,
             original_url VARCHAR(255) NOT NULL,
             original_price FLOAT NOT NULL,
+            edition     VARCHAR(50) DEFAULT "Standart edition",
             sales       INT DEFAULT 0,
 
             created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

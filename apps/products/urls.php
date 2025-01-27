@@ -2,6 +2,7 @@
 require_once APPS_PATH . '/products/controllers.php';
 
 $product_urls = [
-    new Path('/item/[:string]', new SingleProductController(), 'single')
+    new Path('/catalog', new CatalogController(), 'catalog'),
+    new Path('/product/[:string]', new SingleProductController(), 'single')
 ];
 ?>

@@ -276,6 +276,26 @@ class ProfileController extends BaseController {
     protected $template_name = USER_TEMPLATES . '/profile.php';
     protected $allow_role = 'user';
 }
+class WishlistController extends BaseController {
+    protected $template_name = USER_TEMPLATES . '/wishlist.php';
+    protected $allow_role = 'user';
+
+    public function get_context_data() {
+        $context = parent::get_context_data();
+
+        $context['products'] = ProductModel::filter(
+            array(
+                [
+                    'name'      => 'is_in_wishlist',
+                    'value'     => 1,
+                    'is_having' => true
+                ]
+            )
+        );
+
+        return $context;
+    }
+}
 
 class EditContactInfoController extends BaseController {
     protected $template_name = USER_TEMPLATES . '/sect_information/edit_information.php';

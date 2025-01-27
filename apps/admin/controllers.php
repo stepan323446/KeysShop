@@ -22,6 +22,8 @@ class AdminHomeController extends AdminBaseController {
         $datetime_month_ago->modify("-1 month");
         $context['new_user_count'] = db_query('SELECT COUNT(*) FROM ' . UserModel::get_table_name() .' WHERE `register_at` > \'' . $datetime_month_ago->format('Y-m-d H:i:s' . '\''))->fetch_row()[0];
 
+        
+
         return $context;
     }
 }
@@ -218,6 +220,10 @@ class AdminProductController extends AdminSingleController {
             'model_field' => 'original_price',
             'input_type'  => 'number',
             'input_attrs' => ['required']
+        ],
+        [
+            'model_field' => 'edition',
+            'input_type'  => 'text'
         ],
         [
             'model_field' => 'poster_url',

@@ -249,6 +249,20 @@ class BaseModel {
                     $where[] = "{$field['name']} {$field['type']} NULL";
                     continue;
                 }
+                // For array and IN
+                if($field['type'] == 'IN') {
+                    if(!is_array($field['value']))
+                        continue;
+                    
+                    $placeholders = implode(', ', 
+                        array_fill(0, count($field['value']), '?')
+                    );
+                    $where[] = "{$field['name']} IN ({$placeholders})";
+
+                    $params = array_merge($params, $field['value']);
+                    continue;
+                }
+
                 $condition = isset($field['type']) ? $field['type'] : '='; // use '=' as default
                 
                 if($is_having)
@@ -256,7 +270,8 @@ class BaseModel {
                 else
                     $where[] = "{$field['name']} {$condition} ?";
 
-                $params[] = $field['value'];
+                if($field['type'] != 'IN')
+                    $params[] = $field['value'];
             }
             $whereSql = implode(' ' . $field_relation . ' ', $where);
 
@@ -266,7 +281,7 @@ class BaseModel {
 
         // Addition JOIN fields from other tables
         $join_table = '';
-        $additional_fields += static::get_additional_fields();
+        $additional_fields = array_merge($additional_fields, static::get_additional_fields());
         if(!empty($additional_fields)) {
             $tables = array();
             foreach ($additional_fields as $val) {

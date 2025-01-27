@@ -54,7 +54,7 @@
             <a href="<?php the_permalink('admin:product-new') ?>" class="btn">
                 <i class="fa-solid fa-plus"></i> New Product
             </a>
-            <form method="get">
+            <form action="<?php the_permalink('admin:product-list') ?>" method="get">
                 <div class="input">
                     <input type="text" name="s" placeholder="Search for products">
                     <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>

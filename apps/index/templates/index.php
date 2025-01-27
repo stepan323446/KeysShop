@@ -13,7 +13,7 @@
         <div class="swiper-wrapper">
             <?php foreach($context['latest_changes'] as $product): ?>
             <div class="swiper-slide" style="background-image: url(<?php echo $product->get_image_url() ?>);">
-                <a href="#" class="recent-keys-item">
+                <a href="<?php echo $product->get_absolute_url() ?>" class="recent-keys-item">
                     <div class="recent-keys__title clamp clamp-1">
                         <?php echo $product->field_title ?>
                     </div>
@@ -23,7 +23,7 @@
                         </div>
                         <div class="btn btn-price btn-gray">
                             <?php echo $product->get_price_format() . "$" ?>
-                            <span><?php echo '-' . $product->get_discount() . '%' ?></span>
+                            <span class="meta-price"><?php echo '-' . $product->get_discount() . '%' ?></span>
                         </div>
                     </div>
                 </a>

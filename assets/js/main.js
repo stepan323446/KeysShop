@@ -44,6 +44,12 @@ function showToastify(message, type = "info") {
         duration: 3000 })
     .showToast();
 }
+function blockScroll(turnOn) {
+    if(turnOn)
+        document.body.classList.add('lock');
+    else
+        document.body.classList.remove('lock');
+}
 
 // Profile avatar
 let headerAvatar = document.getElementById('header-avatar');
@@ -60,6 +66,10 @@ function addToWishlist(container) {
 
     btnsWishlist.forEach(btn => {
         let productId = btn.getAttribute('product-id');
+        let icon = btn.querySelector('i');
+        let textSpan = btn.querySelector('span');
+
+        let isWishlist = icon.classList.contains('fa-solid');
 
         btn.addEventListener('click', (e) => {
             sendAjax(
@@ -70,9 +80,14 @@ function addToWishlist(container) {
                 btn.disabled = true;
             },
             (result) => {
-                let icon = btn.querySelector('i');
+                isWishlist = !isWishlist;
                 icon.classList.toggle('fa-regular');
                 icon.classList.toggle('fa-solid');
+                
+                if(isWishlist && textSpan)
+                    textSpan.textContent = "Remove from List";
+                else if(textSpan)
+                    textSpan.textContent = "Add to Wishlist";
 
                 showToastify(result.message);
                 btn.disabled = false;

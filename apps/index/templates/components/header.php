@@ -43,10 +43,10 @@
                     <a href="<?php the_permalink('index:home') ?>" class="logo">KeysShop</a>
                 </div>
                 <div class="center">
-                    <a class="header-nav-link" href="#"><i class="fa-solid fa-gamepad"></i> All Products</a>
-                    <form action="#">
+                    <a class="header-nav-link" href="<?php the_permalink('products:catalog') ?>"><i class="fa-solid fa-gamepad"></i> All Products</a>
+                    <form action="<?php the_permalink('products:catalog') ?>">
                         <div id="search-global" class="input">
-                            <input type="text" name="s" placeholder="Search for products">
+                            <input type="text" name="s" placeholder="Search for products" value="<?php echo the_safe($_GET['s']) ?? '' ?>">
                             <button type="submit"><i class="fa-solid"></i></button>
                         </div>
                     </form>
