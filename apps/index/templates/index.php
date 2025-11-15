@@ -5,7 +5,8 @@
     [
         ['robots', 'nofollow, noindex'],
         ['keywords', 'keys, programms, games, xbox, pc, playstation']
-]) ?>
+]); 
+?>
 
 <div class="container">
     <?php if(!empty($context['latest_changes'])): ?>

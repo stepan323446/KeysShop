@@ -63,10 +63,17 @@ class BaseController
     protected function post() {
         
     }
+    protected function post_before_context() {
+
+    }
     
     public function __display()
     {
         $this->restrict();
+
+        // Post method
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+            $this->post_before_context();
         
         // Collect all context vars
         $this->context += $this->url_context + $this->get_context_data();

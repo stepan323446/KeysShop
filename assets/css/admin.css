@@ -199,3 +199,21 @@ body {
 .admin-container.delete .btn-control {
     justify-content: space-around;
 }
+.order-stat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px !important;
+    font-size: 18px;
+    justify-content: space-between;
+}
+.order-content .admin-block__table {
+    margin-top: 15px;
+}
+.order-stat span:first-child {
+    color: var(--text-color);
+    font-weight: 400;
+    font-family: var(--font-family-header);
+}
+.order-stat span:last-child {
+    color: var(--h-color);
+}

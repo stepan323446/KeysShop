@@ -164,7 +164,7 @@ $my_app_urls = [
 ];
 ```
 
-#### Integrating Routes into the Main Application**
+#### Integrating Routes into the Main Application
 
 The array of mini-application routes is then added to the **root directory**'s `urls.php` file, specifying the group name. Additionally, error controllers (e.g., "default", 404, 500) can also be defined:
 

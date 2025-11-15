@@ -183,12 +183,70 @@ function get_auth_user() {
 function set_auth_user($user_id) {
     $_SESSION['user_id'] = $user_id;
 }
+
+require_once APPS_PATH . '/products/models.php';
+function get_cart_information() {
+    $result = array();
+    $result['products'] = array();
+    $result['total_price'] = 0;
+
+    if(!empty($_SESSION['cart'])) {
+        $cart_products = ProductModel::filter(
+            array(
+                [
+                    'name'      => 'obj.id',
+                    'type'      => 'IN',
+                    'value'     => $_SESSION['cart']
+                ]
+                ),
+            array(),
+            10,
+            'AND',
+            0,
+            '',
+            array(
+                [
+                    "field"         => [
+                        "region_tb.name AS region_title",
+                    ],
+                    "join_table"    => "taxonomies region_tb ON region_tb.id = obj.region_id"
+                ]
+            )
+        );
+        foreach ($cart_products as $product) {
+            $result['total_price'] += $product->get_price();
+            $result['products'][] = array(
+                'id'        => $product->get_id(),
+                'title'     => $product->field_title,
+                'image'     => $product->get_poster_url(),
+                'image_cover' => $product->get_image_url(),
+                'price'     => $product->get_price_format(),
+                'old_price' => $product->field_original_price,
+                'discount'  => $product->get_discount(),
+                'permalink' => $product->get_absolute_url(),
+                'platform_name' => $product->platform_title,
+                'region_title' => $product->region_title,
+                'platform_icon' => $product->platform_icon,
+                'is_available' => $product->is_available()
+            );
+        }
+    }
+    $result['count'] = count($result['products']);
+    $result['total_price'] = number_format($result['total_price'], 2);
+
+    return $result;
+}
+function set_order_data($cart_information) {
+    $_SESSION['order'] = $cart_information;
+}
+function get_order_data() {
+    return $_SESSION['order'];
+}
 /**
  * Destroy all session variables (and with current user)
  */
 function logout() {
-    session_unset();
-    session_destroy();
+    $_SESSION['user_id'] = null;
 }
 function generate_uuid() {
     return sprintf(

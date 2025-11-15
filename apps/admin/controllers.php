@@ -8,6 +8,7 @@ require_once APPS_PATH . '/admin/functions.php';
 require_once APPS_PATH . '/users/models.php';
 require_once APPS_PATH . '/contacts/models.php';
 require_once APPS_PATH . '/products/models.php';
+require_once APPS_PATH . '/order/models.php';
 
 define('ADMIN_TEMPLATES', APPS_PATH . '/admin/templates');
 
@@ -20,8 +21,20 @@ class AdminHomeController extends AdminBaseController {
 
         $datetime_month_ago = new DateTime();
         $datetime_month_ago->modify("-1 month");
+        
+        // Stats
         $context['new_user_count'] = db_query('SELECT COUNT(*) FROM ' . UserModel::get_table_name() .' WHERE `register_at` > \'' . $datetime_month_ago->format('Y-m-d H:i:s' . '\''))->fetch_row()[0];
+       
+        $context['total_sales'] = db_query('SELECT SUM(price) FROM ' . KeyModel::get_table_name() . ' WHERE bought_at > \''. $datetime_month_ago->format('Y-m-d H:i:s' . '\''))->fetch_row()[0];
+        $context['total_loss'] = db_query('SELECT SUM(original_price) FROM ' . KeyModel::get_table_name() . ' WHERE created_at > \''. $datetime_month_ago->format('Y-m-d H:i:s' . '\''))->fetch_row()[0];
+        $context['total_profit'] = $context['total_sales'] - $context['total_loss'];
+        
+        $context['total_orders'] = db_query('SELECT COUNT(*) FROM ' . OrderModel::get_table_name() . ' WHERE created_at > \''. $datetime_month_ago->format('Y-m-d H:i:s' . '\''))->fetch_row()[0];
 
+        $context['last_orders'] = OrderModel::filter(
+            array(),
+            ['-obj.created_at'],
+        );
         
 
         return $context;
@@ -109,6 +122,20 @@ class AdminKeyListController extends AdminListController {
             ]
         );
     }
+}
+class AdminOrderListController extends AdminListController {
+    protected $model_сlass_name = "OrderModel";
+    protected $table_fields = array(
+        'Order number'      => 'field_order_number',
+        'Method'            => 'field_method',
+        'Total price'        => 'get_total_price()',
+        'Buyer'             => 'get_buyer_username()',
+        'Created at'        => 'field_created_at'
+    );
+    protected $verbose_name = "order";
+    protected $verbose_name_multiply = "orders";
+    protected $sort_by = ['-obj.created_at'];
+    protected $single_router_name = 'admin:order';
 }
 
 /*
@@ -365,6 +392,37 @@ class AdminFeedbackController extends AdminSingleController {
         }
     }
 }
+class AdminOrderController extends AdminSingleController {
+    protected $model_сlass_name = "OrderModel";
+    protected $field_title = 'field_order_number';
+    protected $verbose_name = 'order';
+    protected $object_router_name = 'admin:order';
+    protected $component_widgets = ['the_order_info'];
+    protected $can_save = false;
+
+    protected $fields = array(
+        [
+            'model_field' => 'method',
+            'input_type' => 'text',
+            'input_attrs' => ['required']
+        ],
+        [
+            'model_field' => 'order_number',
+            'input_type' => 'text',
+            'input_attrs' => ['required']
+        ],
+        [
+            'model_field' => 'created_at',
+            'input_type' => 'text',
+            'input_attrs' => ['required']
+        ],
+        [
+            'model_field' => 'user_id',
+            'input_type' => 'text',
+            'input_attrs' => ['required']
+        ]
+    );
+}
 
 class AdminTaxonomyController extends AdminSingleController {
     protected $model_сlass_name = "TaxonomyModel";
@@ -431,6 +489,12 @@ class AdminDeleteController extends AdminBaseController {
             case 'taxonomies':
                 $model_class = "TaxonomyModel";
                 break;
+            case 'orders':
+                $model_class = "OrderModel";
+                break;
+            case 'product-keys':
+                $model_class = "KeyModel";
+                break;
             
             default:
                 return null;
@@ -470,6 +534,14 @@ class AdminDeleteController extends AdminBaseController {
                 $back_url = get_permalink('admin:product', [$model->get_id()]);
                 $field = 'field_title';
                 break;
+            case 'orders':
+                $back_url = get_permalink('admin:order', [$model->get_id()]);
+                $field = 'field_order_number';
+                break;
+            case 'product-keys':
+                $back_url = get_permalink('admin:product-key', [$model->get_id()]);
+                $field = 'field_created_at';
+                break;
         }
         
         $context['back_url'] = $back_url;
@@ -500,6 +572,12 @@ class AdminDeleteController extends AdminBaseController {
                 break;
             case 'products':
                 $link = get_permalink('admin:product-list');
+                break;
+            case 'orders':
+                $link = get_permalink('admin:order-list');
+                break;
+            case 'product-keys':
+                $link = get_permalink('admin:key-list');
                 break;
             default:
                 $link = get_permalink('admin:home');

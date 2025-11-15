@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="product-single-control">
-                <button type="button" class="btn <?php echo $context['product']->is_available() ? 'btn-primary' : 'btn-gray' ?> btn-price" <?php echo $context['product']->is_available() ? '' : 'disabled' ?>>
+                <button type="button" product-id="<?php echo $context['product']->get_id() ?>" class="btn <?php echo $context['product']->is_available() ? 'btn-primary btn-add-to-cart' : 'btn-gray' ?> btn-price" <?php echo $context['product']->is_available() ? '' : 'disabled' ?>>
                     <i class="fa-solid fa-cart-shopping"></i> <?php echo $context['product']->get_price_format() . "$" ?>
                     
                     <div class="meta-price">

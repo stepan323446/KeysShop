@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-info btn-wishlist" product-id="<?php echo $product->get_id() ?>"><i class="<?php echo empty($product->is_in_wishlist) ? 'fa-regular' : 'fa-solid' ?> fa-heart"></i></button>
                     
                     <?php if($product->is_available()): ?>
-                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Buy now</button>
+                    <button type="button" class="btn btn-add-to-cart btn-primary" product-id="<?php echo $product->get_id() ?>"><i class="fa-solid fa-cart-shopping"></i> Buy now</button>
                     <?php else: ?>
                     <button type="button" class="btn btn-gray" disabled>Out of Stock</button>
                     <?php endif; ?>

@@ -76,3 +76,15 @@ function the_related_product($key) {
     );
     require_once ADMIN_TEMPLATES . '/widgets/related_product.php';
 }
+function the_order_info($order) {
+    $keys = KeyModel::filter(
+        array(
+            [
+                'name'      => 'obj.order_id',
+                'value'     => $order->get_id()
+            ]
+        )
+    );
+    
+    require_once ADMIN_TEMPLATES . '/widgets/order_info.php';
+}

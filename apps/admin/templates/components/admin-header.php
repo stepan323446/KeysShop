@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a class="<?php echo Router::$current_router_name == 'admin:order-list' ? "active" : "" ?>" href="<?php the_permalink('admin:order-list') ?>">
                         <i class="fa-solid fa-truck"></i> Orders
                     </a>
                 </li>

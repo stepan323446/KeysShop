@@ -30,7 +30,7 @@
                             <a href="<?php the_permalink("users:profile") ?>">My Account</a>
                         </li>
                         <li>
-                            <a href="#">My orders</a>
+                            <a href="<?php the_permalink('users:orders') ?>">My orders</a>
                         </li>
                         <li>
                             <a href="<?php the_permalink('users:wishlist') ?>">My wishlist</a>

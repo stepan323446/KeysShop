@@ -11,7 +11,7 @@
                 </div>
                 <div class="info">
                     <div class="label">Total sales</div>
-                    <div class="value">$2,325</div>
+                    <div class="value"><?php echo number_format($context['total_sales'], 2) ?>$</div>
                 </div>
             </div>
 
@@ -21,7 +21,7 @@
                 </div>
                 <div class="info">
                     <div class="label">Profit</div>
-                    <div class="value">$1,654</div>
+                    <div class="value"><?php echo number_format($context['total_profit'], 2) ?>$</div>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
                 </div>
                 <div class="info">
                     <div class="label">Orders</div>
-                    <div class="value">78</div>
+                    <div class="value"><?php echo $context['total_orders'] ?></div>
                 </div>
             </div>
 
@@ -65,6 +65,29 @@
     </section>
 
     <h2>Latest orders</h2>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Order number</th>
+                <th>Method</th>
+                <th>Total price</th>
+                <th>Buyer</th>
+                <th>Created at</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($context['last_orders'] as $order): ?>
+            <tr>
+                <td><a href="<?php the_permalink('admin:order', [$order->get_id()]) ?>"><?php echo $order->field_order_number ?></a></td>
+                <td><?php echo $order->field_method ?></td>
+                <td><?php echo $order->get_total_price() ?></td>
+                <td><?php echo $order->get_buyer_username() ?></td>
+                <td><?php echo $order->field_created_at ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 
 <?php the_admin_footer() ?>

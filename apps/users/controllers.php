@@ -5,6 +5,7 @@ require_once APPS_PATH . '/users/functions.php';
 require_once APPS_PATH . '/users/components.php';
 
 define('USER_TEMPLATES', APPS_PATH . '/users/templates');
+define('MAX_ORDER_PER_PAGE', 20);
 
 
 class LoginController extends BaseController {
@@ -136,7 +137,7 @@ class ForgotPasswordController extends BaseController {
                     return;
                 }
                 
-                // Send new recovery password email
+                // Create recovery code
                 $recoveryModel = new RecoveryPassModel(array(
                     'user_id' => $user->get_id(),
                     'recovery_slug' => generate_uuid()
@@ -146,6 +147,7 @@ class ForgotPasswordController extends BaseController {
                 $link_to_recovery = get_permalink('users:reset', [$recoveryModel->field_recovery_slug]);
                 
 
+                // E-mail template for recovery
                 $body = get_recovery_email_template(
                     $user->get_public_name(), 
                     $link_to_recovery);
@@ -292,6 +294,82 @@ class WishlistController extends BaseController {
                 ]
             )
         );
+
+        return $context;
+    }
+}
+class MyOrdersController extends BaseController {
+    protected $template_name = USER_TEMPLATES . '/orders.php';
+    protected $allow_role = 'user';
+
+    public function get_context_data() {
+        $context = parent::get_context_data();
+
+        $page = $_GET['page'] ?? 1;
+        $page = (int)$page;
+        $context['page'] = $page;
+
+        $filter_fields = array(
+            [
+                'name'      => 'buyer_id',
+                'value'     => CURRENT_USER->get_id(),
+                'is_having' => true
+            ]
+        );
+        $key_add_fields = array(
+            [
+                "field"         => [
+                    "ord.order_number AS order_number",
+                    "ord.method AS order_method",
+                ],
+                "join_table"    => "orders ord ON ord.id = obj.order_id"
+            ]
+            );
+
+        $context['keys'] = KeyModel::filter(
+            $filter_fields,
+            ['-obj.bought_at'],
+            MAX_ORDER_PER_PAGE,
+            'AND',
+            calc_page_offset(MAX_ORDER_PER_PAGE, $page),
+            '',
+            $key_add_fields
+        );
+        $context['keys_count'] = KeyModel::count($filter_fields, '', $key_add_fields);
+
+        $keys_ids = array_map(function($key) {
+            return $key->field_product_id;
+        }, $context['keys']);
+
+        if(!empty($keys_ids)) {
+            $products = ProductModel::filter(
+                array(
+                    [
+                        'name'      => 'obj.id',
+                        'type'      => 'IN',
+                        'value'     => $keys_ids
+                    ]
+                ),
+                array(),
+                MAX_ORDER_PER_PAGE,
+                'AND',
+                0,
+                '',
+                array(
+                    [
+                        "field"         => [
+                            "tb3.name AS region_title",
+                        ],
+                        "join_table"    => "taxonomies tb3 ON tb3.id = obj.region_id"
+                    ]
+                )
+            );
+        }
+        $products_key_val = array();
+        foreach ($products as $product) {
+            $products_key_val[$product->get_id()] = $product;
+        }
+        $context['products'] = $products_key_val;
 
         return $context;
     }

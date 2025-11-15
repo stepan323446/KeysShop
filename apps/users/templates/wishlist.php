@@ -11,6 +11,11 @@
 
     <h1 class="p-title">My Wishlist</h1>
 
+    <?php
+        if(empty($context['products']))
+            echo '<div class="nothing">There are no products</div>';
+        ?>
+
     <div class="grid-product-items">
         <?php foreach ($context['products'] as $prod) {
             the_product($prod);

@@ -278,6 +278,9 @@ class KeyModel extends BaseModel {
     public $field_created_at;
     public $field_bought_at;
 
+    // join products table
+    public $product_name;
+
     static protected $search_fields = ['obj.key_code'];
     static protected $table_name = 'product_keys';
     static protected $table_fields = [
@@ -306,6 +309,20 @@ class KeyModel extends BaseModel {
         );');
         return $result;
     }
+    static protected $additional_fields = array(
+        [
+            'field' => [
+                'tb1.title AS product_name'
+            ],
+            'join_table' => 'products tb1 ON tb1.id = obj.product_id'
+        ],
+        [
+            'field' => [
+                'tb2.user_id AS buyer_id'
+            ],
+            'join_table' => 'orders tb2 ON tb2.id = obj.order_id'
+        ]
+    );
 
     // Update product after new key
     protected function after_save() {

@@ -2,8 +2,7 @@
 $user_nav = array(
     'users:profile' => 'Information',
     'users:wishlist' => 'My wishlist',
-    'users:orders' => 'My orders',
-    'users:cart' => 'My cart'
+    'users:orders' => 'My orders'
 );
 ?>
 

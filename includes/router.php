@@ -293,6 +293,12 @@ class UnauthorizedHttp401 extends PageError {
         parent::__construct($message);
     }
 }
+class BadRequestHttp400 extends PageError {
+    protected $page_error = 400;
+    public function __construct($message = 'Bad Request') {
+        parent::__construct($message);
+    }
+}
 class PermissionDeniedHttp403 extends PageError { 
     protected $page_error = 403;
     public function __construct($message = 'Forbidden') {

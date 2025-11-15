@@ -11,6 +11,7 @@ $admin_urls = [
     new Path('/admin/taxonomies', new AdminTaxonomyListController(), 'taxonomy-list'),
     new Path('/admin/products', new AdminProductListController(), 'product-list'),
     new Path('/admin/product/[:int]/keys', new AdminKeyListController(), 'key-list'),
+    new Path('/admin/orders', new AdminOrderListController(), 'order-list'),
 
     ////// Single object ///////
     // User
@@ -27,6 +28,9 @@ $admin_urls = [
     // Product
     new Path('/admin/product/new', new AdminProductController(true), 'product-new'),
     new Path('/admin/product/[:int]', new AdminProductController(false), 'product'),
+
+    // Order
+    new Path('/admin/order/[:int]', new AdminOrderController(false), 'order'),
 
     // Key
     new Path('/admin/product/[:int]/key/new', new AdminKeyController(true), 'product-key-new'),

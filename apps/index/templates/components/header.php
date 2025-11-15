@@ -1,4 +1,8 @@
 
+<?php
+$cart_info = get_cart_information();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,8 @@
     <meta name="description" content="<?php echo $description ?>">
 
     <!-- Meta tags -->
+    <meta name="robots" content="nofollow, noindex">
+
     <?php foreach($meta_tags as $tag): ?>
     <meta name="<?php echo $tag[0] ?>" content="<?php echo $tag[1] ?>">
     <?php endforeach; ?>
@@ -54,11 +60,11 @@
                 <div class="right">
                     <a href="#" class="header-cart">
                         <span class="header-cart__price">
-                            25.30$
+                            <?php echo $cart_info['total_price'] ?>$
                         </span>
                         <div class="header-cart__icon exists">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span id="header-cart-counter">2</span>
+                            <span id="header-cart-counter" <?php echo $cart_info['count'] > 0 ? '' : 'hidden' ?>><?php echo $cart_info['count'] ?></span>
                         </div>
                     </a>
                     <?php if(empty(CURRENT_USER)): ?>
@@ -82,9 +88,8 @@
                                     <div class="modal-profile__inner">
                                         <ul>
                                             <li><a href="<?php the_permalink('users:profile') ?>"><i class="fa-solid fa-circle-info"></i> Personal</a></li>
-                                            <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> My Cart</a></li>
-                                            <li><a href="#"><i class="fa-solid fa-heart"></i> My Wishlist</a></li>
-                                            <li><a href="#"><i class="fa-solid fa-key"></i> My Orders</a></li>
+                                            <li><a href="<?php the_permalink('users:wishlist') ?>"><i class="fa-solid fa-heart"></i> My Wishlist</a></li>
+                                            <li><a href="<?php the_permalink('users:orders') ?>"><i class="fa-solid fa-key"></i> My Orders</a></li>
                                         </ul>
                                     </div>
                                     <hr>
@@ -95,9 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                         </div>
-
-                         
+                        </div>
                     <?php endif; ?>                    
                 </div>
             </div>
@@ -106,6 +109,28 @@
     
     <div id="ajax-search-result" hidden>
         <div class="content">
+        </div>
+    </div>
+    <div id="cart-container" class="background-screen">
+        <div class="cart-wrapper">
+            <div class="cart-header">
+                <div class="cart-header__text">
+                    My Cart
+                </div>
+                <div class="cart-header__close cart-close"><i class="fa-solid fa-x"></i></div>
+            </div>
+            <div class="nothing">You have no items in your shopping cart.</div>
+            <div class="cart-items">
+                
+            </div>
+            <div class="cart-btn">
+                <div class="total-price">
+                    <span>Total price:</span>
+                    <span class="price">43.33$</span>
+                </div>
+                <a href="<?php the_permalink('order:index') ?>" class="btn btn-primary">Checkout</a>
+                <button type="button" class="btn cart-close">Continue shopping</button>
+            </div>
         </div>
     </div>
 

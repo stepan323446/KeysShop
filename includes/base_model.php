@@ -354,7 +354,7 @@ class BaseModel {
         else
             return false;
     }
-    static function count($fields, $search) {
+    static function count($fields, $search, $additional_fields = array()) {
         $filter_result = static::filter(
             $fields,
             array(),
@@ -362,11 +362,11 @@ class BaseModel {
             'AND',
             0,
             $search,
-            array(
+            array_merge($additional_fields, array(
                 [
                     'field' => ['COUNT(*) OVER () AS func_total_count']
                 ]
-            )
+            ))
         );
         if(empty($filter_result))
             return 0;

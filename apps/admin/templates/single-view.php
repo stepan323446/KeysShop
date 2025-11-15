@@ -112,7 +112,7 @@ $disabled_attr = $context['can_save'] ? '' : 'disabled';
                 <div class="admin-block__content">
                     <div class="btn-control">
                         <?php if($context['object']->is_saved()): ?>
-                        <a href="<?php the_permalink('admin:delete', [$context['object']->get_table_name(), $context['object']->get_id()]) ?>" class="btn btn-danger" type="submit">Delete</a>
+                        <a href="<?php the_permalink('admin:delete', [str_replace('_', '-', $context['object']->get_table_name()), $context['object']->get_id()]) ?>" class="btn btn-danger" type="submit">Delete</a>
                         <?php else: ?>
                         <span></span>
                         <?php endif; ?>

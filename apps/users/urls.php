@@ -10,6 +10,7 @@ $users_urls = [
     // Profile
     new Path('/user', new ProfileController(), 'profile'),
     new Path('/user/wishlist', new WishlistController(), 'wishlist'),
+    new Path('/user/orders', new MyOrdersController(), 'orders'),
     new Path('/user/edit/information', new EditContactInfoController(), 'edit-info'),
     new Path('/user/edit/email', new EditEmailController(), 'edit-email'),
     new Path('/user/edit/password', new EditPasswordController(), 'edit-password'),
