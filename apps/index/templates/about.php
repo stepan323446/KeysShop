@@ -47,17 +47,6 @@
             </div>
         </div>
     </section>
-    <section class="article-text about-section reverse">
-        <div class="left">
-            <h2 class="p-title">Secure payments via the Stripe system</h2>
-            <p>We prioritize your security and convenience. All transactions on our platform are processed through the trusted and reliable Stripe payment system, ensuring your personal and financial information remains protected at all times. Shop with confidence!</p>
-        </div>
-        <div class="right">
-            <div class="image">
-                <img src="<?php echo ASSETS_PATH . '/images/about/stripe.png' ?>" alt="">
-            </div>
-        </div>
-    </section>
 </div>
 
 <?php the_footer() ?>
