@@ -161,7 +161,7 @@ class ProductModel extends BaseModel {
             $add_fields = array_merge($add_fields, array(
                 [
                     "field" => [
-                        "CASE WHEN wish.user_id = ". CURRENT_USER->get_id() ." THEN 1 ELSE 0 END AS is_in_wishlist"
+                        "MAX(CASE WHEN wish.user_id = ". CURRENT_USER->get_id() ." THEN 1 ELSE 0 END) AS is_in_wishlist"
                     ],
                     "join_table" => "wishlist wish ON wish.product_id = obj.id"
                 ]
