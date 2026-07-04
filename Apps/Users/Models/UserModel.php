@@ -5,10 +5,10 @@ use Includes\Model\BaseModel;
 use Includes\Model\CustomDateTime;
 
 class UserModel extends BaseModel {
-    public string $field_username;
-    public string $field_email;
-    public string $field_fname;
-    public string $field_lname;
+    public string $field_username = "";
+    public string $field_email = "";
+    public string $field_fname = "";
+    public string $field_lname = "";
     public string $field_password;
     public bool $field_is_admin = false;
     public  CustomDateTime|null $field_register_at = null;
@@ -102,9 +102,9 @@ class UserModel extends BaseModel {
 
         // Check length 
         $username_len = strlen($this->field_username);
-        $email_len = strlen($this->field_username);
-        $fname_len = strlen($this->field_username);
-        $lname_len = strlen($this->field_username);
+        $email_len = strlen($this->field_email);
+        $fname_len = strlen($this->field_fname);
+        $lname_len = strlen($this->field_lname);
 
         if($username_len > 20 || $username_len < 4)
             $errors[] = 'The username must be between 4 and 20 characters long';

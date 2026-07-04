@@ -2,7 +2,6 @@
 
 namespace Includes\Model;
 
-use mysqli_result;
 
 abstract class BaseModel
 {
@@ -81,7 +80,7 @@ abstract class BaseModel
                 case 'DateTime':
                     $this->{'field_' . $key} = new CustomDateTime($value);
                     break;
-                case 'bool';
+                case 'bool':
                     $this->{'field_' . $key} = (bool)$value;
                     break;
                 case 'string':
@@ -232,6 +231,7 @@ abstract class BaseModel
             foreach ($fields as $field) {
                 // Having or Where
                 $is_having = $field['is_having'] ?? false;
+                $condition = isset($field['type']) ? $field['type'] : '='; // use '=' as default
 
 
                 // For null values
@@ -240,7 +240,7 @@ abstract class BaseModel
                     continue;
                 }
                 // For array and IN
-                if ($field['type'] == 'IN') {
+                if ($condition == 'IN') {
                     if (!is_array($field['value']))
                         continue;
 
@@ -254,14 +254,12 @@ abstract class BaseModel
                     continue;
                 }
 
-                $condition = isset($field['type']) ? $field['type'] : '='; // use '=' as default
-
                 if ($is_having)
                     $having[] = "{$field['name']} {$condition} ?";
                 else
                     $where[] = "{$field['name']} {$condition} ?";
-
-                if ($field['type'] != 'IN')
+                
+                if ($condition != 'IN')
                     $params[] = $field['value'];
             }
             $whereSql = implode(' ' . $field_relation . ' ', $where);

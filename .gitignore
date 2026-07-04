@@ -1,4 +1,6 @@
 config.php
+config.testing.php
+.phpunit.result.cache
 /media
 vendor/
 /vendor/

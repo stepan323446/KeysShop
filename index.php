@@ -8,7 +8,6 @@ define('BASE_PATH', __DIR__);
 define('APPS_PATH', BASE_PATH . '/Apps');
 define('INCLUDES_PATH', BASE_PATH . '/Includes');
 
-require_once BASE_PATH . '/functions.php';
 require_once BASE_PATH . '/config.php';
 require_once BASE_PATH . '/db.php';
 

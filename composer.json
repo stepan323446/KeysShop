@@ -3,7 +3,8 @@
     "autoload": {
         "psr-4": {
             "Apps\\": "Apps/",
-            "Includes\\": "Includes/"
+            "Includes\\": "Includes/",
+            "Tests\\": "Tests/"
         },
         "files": [
             "functions.php"
@@ -17,5 +18,8 @@
     ],
     "require": {
         "phpmailer/phpmailer": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10"
     }
 }

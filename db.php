@@ -5,7 +5,7 @@ try {
            ";dbname=" . DB_AUTH['db_name'] . 
            ";charset=" . DB_AUTH['db_charset'];
 
-    $pdo = new PDO($dsn, DB_AUTH['db_username'], DB_AUTH['db_password'], [
+    $GLOBALS['pdo'] = new PDO($dsn, DB_AUTH['db_username'], DB_AUTH['db_password'], [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);

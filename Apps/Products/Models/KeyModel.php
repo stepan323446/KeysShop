@@ -16,6 +16,7 @@ class KeyModel extends BaseModel {
 
     // join products table
     public string $product_name;
+    public ?int $buyer_id = null;
 
     static protected $search_fields = ['obj.key_code'];
     static protected $table_name = 'product_keys';
