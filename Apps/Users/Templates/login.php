@@ -7,7 +7,9 @@ the_header(
     'login-register', 
     [
         ['robots', 'nofollow, noindex']
-]) ?>
+]);
+require_once APPS_PATH . '/Index/components.php';
+?>
 
 <div class="container">
     <div class="login__inner">

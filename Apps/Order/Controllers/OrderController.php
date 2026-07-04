@@ -20,7 +20,10 @@ class OrderController extends BaseController {
             case 'test-method':
                 method_test_method();
                 break;
-
+            case 'stripe':
+                method_stripe_init();
+                break;
+            
             default:
                 throw new BadRequest400();
         }

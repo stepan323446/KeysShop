@@ -55,4 +55,8 @@ define('TELEGRAM_BOT_CHATID', '<CHAT_ID_BOT>');
 
 // Telegram bot token for sending messages
 define('TELEGRAM_BOT_TOKEN', '<BOT_TOKEN>');
+
+// Stripe Settings
+define('STRIPE_SECRET_KEY', '<SECRET_KEY>');
+define('STRIPE_WEBHOOK_SECRET', '<SECRET_KEY>');
 ?>

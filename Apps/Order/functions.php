@@ -1,67 +1,98 @@
 <?php
 
 use Apps\Order\Models\OrderModel;
-use Apps\Products\Models\ProductModel;
+use Apps\Products\Models\KeyModel;
 use Includes\Model\CustomDateTime;
 use Includes\Routing\HttpExceptions\BadRequest400;
+use Includes\Routing\HttpExceptions\ServerError500;
 
 function method_test_method() {
-    $order_data = get_order_data();
-    $product_key_price = array();
+    global $pdo;
 
-    foreach ($order_data['products'] as $product) {
-        $product_key_price[$product['id']] = (float)$product['price'];
-    }
-    $products = ProductModel::filter(
-        array(
+    $pdo->beginTransaction();
+    try {
+        $now = new CustomDateTime();
+        $prd_with_keys = get_order_with_keys();
+        $order = new OrderModel(array(
+            'method'    => 'test-method',
+            'order_number' => generate_uuid(),
+            'user_id'   => CURRENT_USER->get_id(),
+            'created_at'    => $now
+        ));
+        $order->save();
+
+        $keys_ids = array_map(fn($item) => $item['key_id'], $prd_with_keys);
+        $keys = KeyModel::filter(array(
             [
-                'name'      => 'obj.id',
-                'type'      => 'IN',
-                'value'     => array_keys($product_key_price)
+                'name'  => 'obj.id',
+                'type'  => 'IN',
+                'value' => $keys_ids
             ]
-            ),
-            array(),
-            10,
-            'AND',
-            0,
-            '',
-
-            array(
-                [
-                    'field'   => [
-                        "(SELECT tb1.id FROM product_keys tb1 WHERE tb1.product_id = obj.id AND tb1.order_id IS NULL ORDER BY tb1.price ASC LIMIT 1) AS min_price_key_id"
-                    ]
-                ]
-            )
-    );
-    $keys_id = array();
-    foreach ($products as $product) {
-        if($product->get_price() != $product_key_price[$product->get_id()]) {
-            throw new BadRequest400('Prices have been updated');
+        ), count: count($keys_ids), block_for_update: true);
+        foreach ($keys as $key) {
+            if(!$key->is_available()) {
+                throw new BadRequest400('Product is already bought');
+            }
+            $key->field_order_id = $order->get_id();
+            $key->field_bought_at = $now;
+            $key->save();
         }
-        $keys_id[] = $product->min_price_key_id;
+        $pdo->commit();
     }
-    $order = new OrderModel(array(
-        'method'    => 'test-method',
-        'order_number' => generate_uuid(),
-        'user_id'   => CURRENT_USER->get_id(),
-        'created_at'    => new CustomDateTime()
-    ));
-    $order->save();
-    
-    // Save keys to order
-    $sql = "UPDATE product_keys 
-        SET order_id = ?, 
-            bought_at = ? 
-        WHERE id IN (" . implode(',', array_fill(0, count($keys_id), '?')) . ")";
-    $params = array_merge([$order->get_id(), (string)$order->field_created_at], $keys_id);
-    $result = db_prepare($sql, $params);
+    catch(Exception $ex) {
+        $pdo->rollBack();
+        if(DEBUG_MODE) {
+            print_r($ex);
+            exit;
+        }
+        else {
+            throw new ServerError500();
+        }
+    }
 
     // Clear session for cart and order
     $_SESSION['cart'] = array();
     set_order_data(array());
 
     redirect_to(get_permalink('order:success'));
+}
+function method_stripe_init() {
+    $prd_with_keys = get_order_with_keys();
 
-    exit;
+    \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
+    $line_items = [];
+
+    foreach ($prd_with_keys as $item) {
+        $line_items[] = [
+            'price_data' => [
+                'currency' => 'usd',
+                'product_data' => [
+                    'name' => $item['product']->field_title,
+                ],
+                'unit_amount' => (int) round($item['product']->get_price() * 100),
+            ],
+            'quantity' => 1,
+        ];
+    }
+
+
+    $session = \Stripe\Checkout\Session::create([
+        'payment_method_types' => ['card'],
+        'line_items' => $line_items,
+        'mode' => 'payment',
+        'payment_intent_data' => [
+            'capture_method' => 'manual',
+            'metadata' => [
+                'user_id' => CURRENT_USER->get_id(),
+                'key_ids' => implode(',', array_map(fn($item) => $item['key_id'], $prd_with_keys)),
+            ],
+        ],
+        'success_url' => get_permalink('order:success'),
+        'cancel_url' => get_permalink('order:cancel'),
+    ]);
+    // Clear session for cart and order
+    $_SESSION['cart'] = array();
+    set_order_data(array());
+    
+    redirect_to($session->url);
 }

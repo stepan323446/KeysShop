@@ -116,7 +116,7 @@ abstract class BaseModel
         return static::$additional_fields;
     }
 
-    private static function get_fields_for_select($additional_fields = array())
+    private static function get_fields_for_select($additional_fields = array(), $include_additional_fields = true)
     {
         $fields = array_keys(static::$table_fields);
         $result = '';
@@ -131,15 +131,17 @@ abstract class BaseModel
         }
 
         // Additionl fields
-        $additional_fields += static::get_additional_fields();
-        if (!empty($additional_fields)) {
-            $fields = array();
-            foreach ($additional_fields as $ad_field) {
-                $fields = array_merge($ad_field['field'], $fields);
-            }
+        if($include_additional_fields) {
+            $additional_fields += static::get_additional_fields();
+            if (!empty($additional_fields)) {
+                $fields = array();
+                foreach ($additional_fields as $ad_field) {
+                    $fields = array_merge($ad_field['field'], $fields);
+                }
 
-            $add_fields_str = implode(', ', $fields);
-            $result .= ', ' . $add_fields_str;
+                $add_fields_str = implode(', ', $fields);
+                $result .= ', ' . $add_fields_str;
+            }
         }
 
         return $result;
@@ -198,7 +200,8 @@ abstract class BaseModel
      * @param int $offset
      * @param string $search
      * @param array $additional_fields like static::$additional_fields
-     * @return array(self)
+     * @param bool $block_for_update Locking reads (disable $additional fields)
+     * @return static[]
      */
     static function filter(
         $fields = array(),
@@ -207,7 +210,8 @@ abstract class BaseModel
         $field_relation = 'AND',
         $offset = 0,
         $search = '',
-        $additional_fields = array()
+        $additional_fields = array(),
+        $block_for_update = false
     ) {
         /**
          * $fields = array(
@@ -271,6 +275,9 @@ abstract class BaseModel
         // Addition JOIN fields from other tables
         $join_table = '';
         $additional_fields = array_merge($additional_fields, static::get_additional_fields());
+        if($block_for_update)
+            $additional_fields = [];
+
         if (!empty($additional_fields)) {
             $tables = array();
             foreach ($additional_fields as $val) {
@@ -312,12 +319,18 @@ abstract class BaseModel
         // Limit part
         $limit = "LIMIT " . (int) $count;
         $offsetSql = "OFFSET " . (int)$offset;
+        $other_settings = "";
+
+        // FOR UPDATE blocking
+        if($block_for_update) {
+            $other_settings = "FOR UPDATE";
+        }
 
         // Fields to select from db
-        $select_fields = static::get_fields_for_select($additional_fields);
+        $select_fields = static::get_fields_for_select($additional_fields, !$block_for_update);
 
         // Create full sql query
-        $sql = "SELECT " . $select_fields . " FROM " . static::$table_name . " obj " . $join_table . " " . $whereSql . " GROUP BY obj.id " . $havingSql . " " . $sortSql . " " . $limit . " " . $offsetSql;
+        $sql = "SELECT " . $select_fields . " FROM " . static::$table_name . " obj " . $join_table . " " . $whereSql . " GROUP BY obj.id " . $havingSql . " " . $sortSql . " " . $limit . " " . $offsetSql . " " . $other_settings;
 
         static::$last_query = $sql;
         static::$last_args_query = $params;

@@ -4,6 +4,7 @@ namespace Includes\Routing;
 
 use Includes\Routing\Path;
 use Includes\BaseController;
+use Includes\RestController;
 use Includes\Routing\HttpExceptions;
 
 class Router
@@ -72,6 +73,27 @@ class Router
             self::$routers[$path->name] = $path;
         else
             self::$routers[] = $path;
+    }
+
+    /**
+     * Check if we need to show json answer or not
+     * @return bool
+     */
+    protected static function wants_json(): bool
+    {
+        if (self::$current_router_name !== null && isset(self::$routers[self::$current_router_name])) {
+            $controller = self::$routers[self::$current_router_name]->get_controller();
+
+            if ($controller instanceof RestController) {
+                return true;
+            }
+        }
+        
+        $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+        $content_type = $_SERVER['CONTENT_TYPE'] ?? '';
+
+        return str_contains($accept, 'application/json')
+            || str_contains($content_type, 'application/json');
     }
 
     /**
@@ -153,6 +175,13 @@ class Router
 
         // Set the HTTP response code to match the error code.
         http_response_code($error_code);
+
+        // If the response must be json, show standart JSON error without templates
+        if (static::wants_json()) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($page_error->get_json_error());
+            return;
+        }
 
         // Check if a custom controller exists for the error code.
         if (isset(self::$error_controllers[$error_code])) {

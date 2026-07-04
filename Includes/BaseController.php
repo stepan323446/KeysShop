@@ -70,6 +70,15 @@ abstract class BaseController
     protected function post() {}
     protected function post_before_context() {}
 
+    protected function call_requrest_method() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $this->post();
+    }
+    protected function __display_template() {
+        $context = $this->context;
+        require_once $this->template_name;
+    }
+
     public function __display()
     {
         $this->restrict();
@@ -85,10 +94,8 @@ abstract class BaseController
         $this->distinct();
 
         // Post method
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $this->post();
+        $this->call_requrest_method();
 
-        $context = $this->context;
-        require_once $this->template_name;
+        $this->__display_template();
     }
 }

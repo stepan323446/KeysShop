@@ -3,6 +3,7 @@
 
 use Apps\Products\Models\ProductModel;
 use Apps\Users\Models\UserModel;
+use Includes\Routing\HttpExceptions\BadRequest400;
 use Includes\Routing\Router;
 
 
@@ -249,6 +250,47 @@ function set_order_data(array $cart_information) {
 }
 function get_order_data() {
     return $_SESSION['order'];
+}
+function get_order_with_keys() {
+    $order_data = get_order_data();
+    $product_key_price = array();
+
+    foreach ($order_data['products'] as $product) {
+        $product_key_price[$product['id']] = (float)$product['price'];
+    }
+    $products = ProductModel::filter(
+        array(
+            [
+                'name'      => 'obj.id',
+                'type'      => 'IN',
+                'value'     => array_keys($product_key_price)
+            ]
+            ),
+            array(),
+            10,
+            'AND',
+            0,
+            '',
+
+            array(
+                [
+                    'field'   => [
+                        "(SELECT tb1.id FROM product_keys tb1 WHERE tb1.product_id = obj.id AND tb1.order_id IS NULL ORDER BY tb1.price ASC LIMIT 1) AS min_price_key_id"
+                    ]
+                ]
+            )
+    );
+    $result = array();
+    foreach ($products as $product) {
+        if($product->get_price() != $product_key_price[$product->get_id()]) {
+            throw new BadRequest400('Prices have been updated');
+        }
+        $result[] = [
+            'product' => $product,
+            'key_id' => $product->min_price_key_id
+        ];
+    }
+    return $result;
 }
 /**
  * Destroy all session variables (and with current user)

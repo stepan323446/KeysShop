@@ -21,6 +21,11 @@ class Path
     // The optional name of the path, used for generating URLs.
     public string $name;
 
+    public function get_controller(): BaseController
+    {
+        return $this->__controller;
+    }
+
     /**
      * Path constructor that initializes the path, controller, and optional name.
      * It also formats the path into a regex pattern.

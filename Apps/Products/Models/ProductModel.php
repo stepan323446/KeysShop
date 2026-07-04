@@ -4,6 +4,7 @@ namespace Apps\Products\Models;
 use Includes\Model\BaseModel;
 use Includes\Model\CustomDateTime;
 
+#[\AllowDynamicProperties]
 class ProductModel extends BaseModel {
     public string $field_title;
     public string $field_slug;

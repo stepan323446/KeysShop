@@ -20,4 +20,21 @@ class PageError extends \Exception
     {
         return $this->page_error;
     }
+
+    /**
+     * Returns JSON Error array
+     *
+     * @return array
+     */
+    public function get_json_error()
+    {   
+        $result = array(
+            'code' => $this->page_error,
+            'message' => $this->message
+        );
+        if(DEBUG_MODE) {
+            $result['details'] = $this->getTrace();
+        }
+        return $result;
+    }
 }

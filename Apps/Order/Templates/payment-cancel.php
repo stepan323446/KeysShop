@@ -1,15 +1,15 @@
 <?php 
 the_header(
-    "Payment Success", 
+    "Payment Cancelled", 
     '', 
-    'success', 
+    'cancel', 
     [
         ['robots', 'nofollow, noindex']
     ]);     
 ?>
 
 <div class="order-success-page">
-    <h1 class="p-title">Thank you for your purchase!</h1>
+    <h1 class="p-title">Your purchase was cancelled</h1>
     <div class="message">You will be redirected to your order for 3 seconds.</div>
 </div>
 

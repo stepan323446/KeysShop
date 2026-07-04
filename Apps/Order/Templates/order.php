@@ -24,7 +24,6 @@ the_header("Order", "", "order");
                     </div>
                 </div>
                 <!-- Test method /-->
-
                 <!-- Stripe -->
                 <div class="order-method">
                     <div class="order-method__title"><div class="toggle"></div> Stripe method</div>
