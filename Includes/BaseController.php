@@ -1,9 +1,9 @@
 <?php
 
-namespace KeysShop\Includes;
+namespace Includes;
 
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Routing\HttpExceptions;
+use Includes\Model\BaseModel;
+use Includes\Routing\HttpExceptions;
 
 abstract class BaseController
 {

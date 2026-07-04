@@ -1,5 +1,5 @@
 <?php
-use KeysShop\Apps\Order\Models\OrderModel;
+use Apps\Order\Models\OrderModel;
 
 /** @var OrderModel $order
  * @var array $keys

@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Lists;
+namespace Apps\Admin\Controllers\Lists;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminListController;
+use Apps\Admin\Controllers\Abstract\AdminListController;
 
 class AdminKeyListController extends AdminListController {
-    protected string $model_сlass_name = "KeysShop\Apps\Products\Models\KeyModel";
+    protected string $model_сlass_name = "Apps\Products\Models\KeyModel";
     protected array $table_fields = array(
         'Code'              => 'show_secret_key()',
         'Price'             => 'field_price',

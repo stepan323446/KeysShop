@@ -2,8 +2,8 @@
     "name": "steve-dekart/keys-shop",
     "autoload": {
         "psr-4": {
-            "KeysShop\\Apps\\": "Apps/",
-            "KeysShop\\Includes\\": "Includes/"
+            "Apps\\": "Apps/",
+            "Includes\\": "Includes/"
         },
         "files": [
             "functions.php"

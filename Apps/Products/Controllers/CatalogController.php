@@ -1,12 +1,12 @@
 <?php
 
-namespace KeysShop\Apps\Products\Controllers;
+namespace Apps\Products\Controllers;
 
-use KeysShop\Apps\Products\Models\{
+use Apps\Products\Models\{
     ProductModel,
     TaxonomyModel
 };
-use KeysShop\Includes\BaseController;
+use Includes\BaseController;
 
 define('CATALOG_MAX_PRODUCTS', 20);
 

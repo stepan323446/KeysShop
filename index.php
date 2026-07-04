@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use KeysShop\Includes\Routing\Router;
+use Includes\Routing\Router;
 
 define('BASE_PATH', __DIR__);
 define('APPS_PATH', BASE_PATH . '/Apps');

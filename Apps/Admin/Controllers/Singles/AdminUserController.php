@@ -1,12 +1,12 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Singles;
+namespace Apps\Admin\Controllers\Singles;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminSingleController;
-use KeysShop\Apps\Users\Models\UserModel;
-use KeysShop\Includes\Model\ValidationError;
+use Apps\Admin\Controllers\Abstract\AdminSingleController;
+use Apps\Users\Models\UserModel;
+use Includes\Model\ValidationError;
 
 class AdminUserController extends AdminSingleController {
-    protected string $model_сlass_name = "KeysShop\Apps\Users\Models\UserModel";
+    protected string $model_сlass_name = "Apps\Users\Models\UserModel";
     protected string $field_title = 'field_username';
     protected string $verbose_name = 'user';
     protected array $component_widgets = ['the_last_feedbacks'];

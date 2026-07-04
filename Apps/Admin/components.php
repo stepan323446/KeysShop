@@ -1,10 +1,10 @@
 <?php
 
-use KeysShop\Apps\Contacts\Models\FeedbackModel;
-use KeysShop\Apps\Order\Models\OrderModel;
-use KeysShop\Apps\Products\Models\KeyModel;
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Apps\Users\Models\UserModel;
+use Apps\Contacts\Models\FeedbackModel;
+use Apps\Order\Models\OrderModel;
+use Apps\Products\Models\KeyModel;
+use Apps\Products\Models\ProductModel;
+use Apps\Users\Models\UserModel;
 
 function the_admin_header(string $title, string $feedback_count) {
     require_once APPS_PATH . '/Admin/Templates/components/admin-header.php';

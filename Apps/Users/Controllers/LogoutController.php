@@ -1,7 +1,7 @@
 <?php
-namespace KeysShop\Apps\Users\Controllers;
+namespace Apps\Users\Controllers;
 
-use KeysShop\Includes\BaseController;
+use Includes\BaseController;
 
 
 

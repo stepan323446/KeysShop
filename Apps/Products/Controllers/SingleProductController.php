@@ -1,12 +1,12 @@
 <?php
-namespace KeysShop\Apps\Products\Controllers;
+namespace Apps\Products\Controllers;
 
-use KeysShop\Apps\Products\Models\{
+use Apps\Products\Models\{
     ProductModel,
     TaxonomyModel
 };
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Routing\HttpExceptions\NotFound404;
+use Includes\BaseController;
+use Includes\Routing\HttpExceptions\NotFound404;
 
 class SingleProductController extends BaseController
 {

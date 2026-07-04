@@ -1,7 +1,7 @@
 <?php
 
-use KeysShop\Apps\Users\Controllers;
-use KeysShop\Includes\Routing\Path;
+use Apps\Users\Controllers;
+use Includes\Routing\Path;
 
 $users_urls = [
     // Login and register

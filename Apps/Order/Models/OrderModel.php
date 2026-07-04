@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Order\Models;
+namespace Apps\Order\Models;
 
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Model\CustomDateTime;
+use Includes\Model\BaseModel;
+use Includes\Model\CustomDateTime;
 
 class OrderModel extends BaseModel {
     public string $field_method;
@@ -45,17 +45,5 @@ class OrderModel extends BaseModel {
     }
     public function get_buyer_username() {
         return $this->buyer;
-    }
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            order_number VARCHAR(255) NOT NULL,
-            method VARCHAR(50) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            user_id    INT NOT NULL,
-
-            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT
-        );');
-        return $result;
     }
 }

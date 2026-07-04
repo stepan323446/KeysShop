@@ -1,12 +1,12 @@
 <?php
 
-use KeysShop\Apps\Admin\Controllers\{
+use Apps\Admin\Controllers\{
     AdminHomeController,
     AdminDeleteController
 };
-use KeysShop\Apps\Admin\Controllers\Lists;
-use KeysShop\Apps\Admin\Controllers\Singles;
-use KeysShop\Includes\Routing\Path;
+use Apps\Admin\Controllers\Lists;
+use Apps\Admin\Controllers\Singles;
+use Includes\Routing\Path;
 
 
 $admin_urls = [

@@ -36,6 +36,17 @@ define('EMAIL_SETTINGS', array(
     'from_title'        => 'KeysShop'
 ));
 
+// Registered apps with ordering for dependencies
+define('REGISTERED_APPS', [
+    'Users',
+    'Contacts',
+    'Order',
+    'Products',
+    'Index',
+    'Ajax',
+    'Admin'
+]);
+
 // Enable debug mode
 define('DEBUG_MODE', true);
 

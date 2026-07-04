@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Singles;
+namespace Apps\Admin\Controllers\Singles;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminSingleController;
+use Apps\Admin\Controllers\Abstract\AdminSingleController;
 
 class AdminFeedbackController extends AdminSingleController {
-    protected string $model_сlass_name = "KeysShop\Apps\Contacts\Models\FeedbackModel";
+    protected string $model_сlass_name = "Apps\Contacts\Models\FeedbackModel";
     protected string $field_title = 'field_name';
     protected string $verbose_name = 'feedback';
     protected array $component_widgets = [ 'the_related_user' ];

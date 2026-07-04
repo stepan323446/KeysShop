@@ -1,8 +1,8 @@
 <?php
 
-namespace KeysShop\Includes\Routing;
+namespace Includes\Routing;
 
-use KeysShop\Includes\BaseController;
+use Includes\BaseController;
 
 /**
  * Class representing a path in the router, including the URL pattern, controller, and optional name.

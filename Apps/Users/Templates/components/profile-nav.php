@@ -1,6 +1,6 @@
 <?php
 
-use KeysShop\Includes\Routing\Router;
+use Includes\Routing\Router;
 
 $user_nav = array(
     'users:profile' => 'Information',

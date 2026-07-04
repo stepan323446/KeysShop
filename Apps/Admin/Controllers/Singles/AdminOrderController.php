@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Singles;
+namespace Apps\Admin\Controllers\Singles;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminSingleController;
+use Apps\Admin\Controllers\Abstract\AdminSingleController;
 
 class AdminOrderController extends AdminSingleController {
-    protected string $model_сlass_name = "KeysShop\Apps\Order\Models\OrderModel";
+    protected string $model_сlass_name = "Apps\Order\Models\OrderModel";
     protected string $field_title = 'field_order_number';
     protected string $verbose_name = 'order';
     protected ?string $object_router_name = 'admin:order';

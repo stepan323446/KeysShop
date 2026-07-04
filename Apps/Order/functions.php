@@ -1,9 +1,9 @@
 <?php
 
-use KeysShop\Apps\Order\Models\OrderModel;
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Includes\Model\CustomDateTime;
-use KeysShop\Includes\Routing\HttpExceptions\BadRequest400;
+use Apps\Order\Models\OrderModel;
+use Apps\Products\Models\ProductModel;
+use Includes\Model\CustomDateTime;
+use Includes\Routing\HttpExceptions\BadRequest400;
 
 function method_test_method() {
     $order_data = get_order_data();

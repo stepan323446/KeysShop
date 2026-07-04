@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Users\Controllers;
+namespace Apps\Users\Controllers;
 
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Includes\BaseController;
+use Apps\Products\Models\ProductModel;
+use Includes\BaseController;
 
 
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace KeysShop\Apps\Users\Controllers;
+namespace Apps\Users\Controllers;
 
 use Exception;
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Model\ValidationError;
-use KeysShop\Includes\Routing\HttpExceptions\Unauthorized401;
+use Includes\BaseController;
+use Includes\Model\ValidationError;
+use Includes\Routing\HttpExceptions\Unauthorized401;
 
 
 

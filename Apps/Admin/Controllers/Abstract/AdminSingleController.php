@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Abstract;
+namespace Apps\Admin\Controllers\Abstract;
 
 use Exception;
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminBaseController;
-use KeysShop\Includes\Model\ValidationError;
-use KeysShop\Includes\Routing\HttpExceptions\NotFound404;
+use Apps\Admin\Controllers\Abstract\AdminBaseController;
+use Includes\Model\ValidationError;
+use Includes\Routing\HttpExceptions\NotFound404;
 
 class AdminSingleController extends AdminBaseController {
     protected string $template_name = APPS_PATH . '/Admin/Templates/single-view.php';

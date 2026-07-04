@@ -1,6 +1,6 @@
 <?php
 
-namespace KeysShop\Includes;
+namespace Includes;
 
 class TelegramBot
 {

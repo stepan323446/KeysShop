@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Order\Controllers;
+namespace Apps\Order\Controllers;
 
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Routing\HttpExceptions\BadRequest400;
+use Includes\BaseController;
+use Includes\Routing\HttpExceptions\BadRequest400;
 
 class OrderController extends BaseController {
     protected string $template_name = APPS_PATH . '/Order/Templates/order.php';

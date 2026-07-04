@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Users\Models;
+namespace Apps\Users\Models;
 
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Model\CustomDateTime;
+use Includes\Model\BaseModel;
+use Includes\Model\CustomDateTime;
 
 class UserModel extends BaseModel {
     public string $field_username;
@@ -25,20 +25,6 @@ class UserModel extends BaseModel {
     ];
     static protected $search_fields = ['obj.username', 'obj.email', 'obj.fname', 'obj.lname'];
 
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(20) UNIQUE NOT NULL,
-            email VARCHAR(40) UNIQUE NOT NULL,
-            fname VARCHAR(20) NULL,
-            lname VARCHAR(20) NULL,
-            password VARCHAR(255) NOT NULL,
-            is_admin TINYINT(1) DEFAULT 0,
-
-            register_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );');
-        return $result;
-    }
     public function get_role() {
         if($this->field_is_admin)
             return 'Admin';

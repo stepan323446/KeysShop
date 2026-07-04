@@ -1,5 +1,5 @@
 <?php
-use KeysShop\Apps\Products\Models\ProductModel;
+use Apps\Products\Models\ProductModel;
 
 /** @var ProductModel $product
 */

@@ -1,50 +1,50 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers;
+namespace Apps\Admin\Controllers;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminBaseController;
-use KeysShop\Includes\Routing\HttpExceptions\NotFound404;
+use Apps\Admin\Controllers\Abstract\AdminBaseController;
+use Includes\Routing\HttpExceptions\NotFound404;
 
 class AdminDeleteController extends AdminBaseController
 {
     const DELETE_MODELS = [
         [
             'url_name'      => 'users',
-            'model'         => 'KeysShop\Apps\Users\Models\UserModel',
+            'model'         => 'Apps\Users\Models\UserModel',
             'field_display' => 'field_username',
             'back_to'       => 'admin:user',
             'success_to'    => 'admin:user-list'
         ],
         [
             'url_name'      => 'feedbacks',
-            'model'         => 'KeysShop\Apps\Contacts\Models\FeedbackModel',
+            'model'         => 'Apps\Contacts\Models\FeedbackModel',
             'field_display' => 'field_created_at',
             'back_to'       => 'admin:feedback',
             'success_to'    => 'admin:feedback-list'
         ],
         [
             'url_name'      => 'taxonomies',
-            'model'         => 'KeysShop\Apps\Products\Models\TaxonomyModel',
+            'model'         => 'Apps\Products\Models\TaxonomyModel',
             'field_display' => 'field_name',
             'back_to'       => 'admin:tax',
             'success_to'    => 'admin:taxonomy-list'
         ],
         [
             'url_name'      => 'products',
-            'model'         => 'KeysShop\Apps\Products\Models\ProductModel',
+            'model'         => 'Apps\Products\Models\ProductModel',
             'field_display' => 'field_title',
             'back_to'       => 'admin:product',
             'success_to'    => 'admin:product-list'
         ],
         [
             'url_name'      => 'orders',
-            'model'         => 'KeysShop\Apps\Order\Models\OrderModel',
+            'model'         => 'Apps\Order\Models\OrderModel',
             'field_display' => 'field_order_number',
             'back_to'       => 'admin:order',
             'success_to'    => 'admin:order-list'
         ],
         [
             'url_name'      => 'product-keys',
-            'model'         => 'KeysShop\Apps\Products\Models\KeyModel',
+            'model'         => 'Apps\Products\Models\KeyModel',
             'field_display' => 'field_created_at',
             'back_to'       => 'admin:product-key',
             'success_to'    => 'admin:key-list'

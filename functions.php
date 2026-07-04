@@ -1,9 +1,9 @@
 <?php
 // For the_footer() and get_footer()
 
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Apps\Users\Models\UserModel;
-use KeysShop\Includes\Routing\Router;
+use Apps\Products\Models\ProductModel;
+use Apps\Users\Models\UserModel;
+use Includes\Routing\Router;
 
 
 function the_header(string $title, string $description, $body_class = '', $meta_tags = array()) {

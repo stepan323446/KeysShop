@@ -1,11 +1,11 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers;
+namespace Apps\Admin\Controllers;
 
 use DateTime;
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminBaseController;
-use KeysShop\Apps\Order\Models\OrderModel;
-use KeysShop\Apps\Products\Models\KeyModel;
-use KeysShop\Apps\Users\Models\UserModel;
+use Apps\Admin\Controllers\Abstract\AdminBaseController;
+use Apps\Order\Models\OrderModel;
+use Apps\Products\Models\KeyModel;
+use Apps\Users\Models\UserModel;
 
 class AdminHomeController extends AdminBaseController {
     protected string $template_name = APPS_PATH . '/Admin/Templates/home.php';

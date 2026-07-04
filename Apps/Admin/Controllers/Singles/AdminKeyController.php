@@ -1,11 +1,11 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Singles;
+namespace Apps\Admin\Controllers\Singles;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminSingleController;
+use Apps\Admin\Controllers\Abstract\AdminSingleController;
 
 
 class AdminKeyController extends AdminSingleController {
-    protected string $model_сlass_name = "KeysShop\Apps\Products\Models\KeyModel";
+    protected string $model_сlass_name = "Apps\Products\Models\KeyModel";
     protected string $field_title = 'field_created_at';
     protected string $verbose_name = "key";
     protected ?string $object_router_name = 'admin:product-key';

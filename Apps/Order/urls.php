@@ -1,7 +1,7 @@
 <?php
 
-use KeysShop\Apps\Order\Controllers;
-use KeysShop\Includes\Routing\Path;
+use Apps\Order\Controllers;
+use Includes\Routing\Path;
 
 $order_urls = [
     new Path('/order', new Controllers\OrderController(), 'index'),

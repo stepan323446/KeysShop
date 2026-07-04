@@ -1,7 +1,7 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Abstract;
+namespace Apps\Admin\Controllers\Abstract;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminBaseController;
+use Apps\Admin\Controllers\Abstract\AdminBaseController;
 
 class AdminListController extends AdminBaseController {
     protected string $template_name = APPS_PATH . '/Admin/Templates/list-view.php';

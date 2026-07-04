@@ -1,11 +1,11 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Singles;
+namespace Apps\Admin\Controllers\Singles;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminSingleController;
-use KeysShop\Apps\Products\Models\TaxonomyModel;
+use Apps\Admin\Controllers\Abstract\AdminSingleController;
+use Apps\Products\Models\TaxonomyModel;
 
 class AdminTaxonomyController extends AdminSingleController {
-    protected string $model_сlass_name = "KeysShop\Apps\Products\Models\TaxonomyModel";
+    protected string $model_сlass_name = "Apps\Products\Models\TaxonomyModel";
     protected string $field_title = 'field_name';
     protected string $verbose_name = 'taxonomy';
     protected ?string $object_router_name = 'admin:tax';

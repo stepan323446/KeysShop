@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Lists;
+namespace Apps\Admin\Controllers\Lists;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminListController;
+use Apps\Admin\Controllers\Abstract\AdminListController;
 
 class AdminOrderListController extends AdminListController {
-    protected string $model_сlass_name = "KeysShop\Apps\Order\Models\OrderModel";
+    protected string $model_сlass_name = "Apps\Order\Models\OrderModel";
     protected array $table_fields = array(
         'Order number'      => 'field_order_number',
         'Method'            => 'field_method',

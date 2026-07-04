@@ -1,7 +1,7 @@
 <?php
 
-use KeysShop\Apps\Index\Controllers;
-use KeysShop\Includes\Routing\Path;
+use Apps\Index\Controllers;
+use Includes\Routing\Path;
 
 $index_urls = [
     new Path('', new Controllers\HomepageController(), 'home'),

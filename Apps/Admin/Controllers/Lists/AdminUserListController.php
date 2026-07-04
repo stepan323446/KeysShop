@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Lists;
+namespace Apps\Admin\Controllers\Lists;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminListController;
+use Apps\Admin\Controllers\Abstract\AdminListController;
 
 class AdminUserListController extends AdminListController {
-    protected string $model_сlass_name = "KeysShop\Apps\Users\Models\UserModel";
+    protected string $model_сlass_name = "Apps\Users\Models\UserModel";
     protected array $table_fields = array(
         'Username' => 'field_username',
         'Public Name	' => 'get_public_name()',

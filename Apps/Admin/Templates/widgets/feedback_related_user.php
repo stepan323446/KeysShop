@@ -1,5 +1,5 @@
 <?php
-use KeysShop\Apps\Users\Models\UserModel;
+use Apps\Users\Models\UserModel;
 
 /** @var UserModel $related_user 
  * @var int $feedback_count 

@@ -2,7 +2,7 @@
 /** @var string $title 
  * @var int $feedback_count 
 */
-use KeysShop\Includes\Routing\Router;
+use Includes\Routing\Router;
 ?>
 
 <!DOCTYPE html>

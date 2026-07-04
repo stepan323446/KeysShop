@@ -1,9 +1,9 @@
 <?php
-namespace KeysShop\Apps\Users\Controllers;
+namespace Apps\Users\Controllers;
 
-use KeysShop\Apps\Users\Models\UserModel;
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Model\ValidationError;
+use Apps\Users\Models\UserModel;
+use Includes\BaseController;
+use Includes\Model\ValidationError;
 use RecoveryPassModel;
 
 

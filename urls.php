@@ -1,7 +1,7 @@
 <?php
 
-use KeysShop\Apps\Index\Controllers\ErrorController;
-use KeysShop\Includes\Routing\Router;
+use Apps\Index\Controllers\ErrorController;
+use Includes\Routing\Router;
 
 require APPS_PATH . '/Index/urls.php';
 require APPS_PATH . '/Products/urls.php';

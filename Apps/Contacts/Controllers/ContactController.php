@@ -1,11 +1,11 @@
 <?php
-namespace KeysShop\Apps\Contacts\Controllers;
+namespace Apps\Contacts\Controllers;
 
 use Exception;
-use KeysShop\Apps\Contacts\Models\FeedbackModel;
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Model\ValidationError;
-use KeysShop\Includes\TelegramBot;
+use Apps\Contacts\Models\FeedbackModel;
+use Includes\BaseController;
+use Includes\Model\ValidationError;
+use Includes\TelegramBot;
 
 class ContactController extends BaseController {
     protected string $template_name = APPS_PATH . '/Contacts/Templates/contacts.php';

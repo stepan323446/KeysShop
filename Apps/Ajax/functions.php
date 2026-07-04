@@ -1,7 +1,7 @@
 <?php
 
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Apps\Products\WishlistModel;
+use Apps\Products\Models\ProductModel;
+use Apps\Products\WishlistModel;
 
 function get_ajax_error(string $message, $error_code = 500) {
     http_response_code($error_code);

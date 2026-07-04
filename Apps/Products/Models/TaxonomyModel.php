@@ -1,7 +1,7 @@
 <?php
-namespace KeysShop\Apps\Products\Models;
+namespace Apps\Products\Models;
 
-use KeysShop\Includes\Model\BaseModel;
+use Includes\Model\BaseModel;
 
 class TaxonomyModel extends BaseModel {
     public string $field_name;
@@ -41,19 +41,6 @@ class TaxonomyModel extends BaseModel {
         return $result;
     }
     
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            type VARCHAR(50) NOT NULL,
-            slug VARCHAR(50) NOT NULL,
-
-            icon_html TEXT NULL,
-            background_color VARCHAR(20) NULL
-        );');
-        return $result;
-    }
-
     public function valid() {
         $errors = array();
 

@@ -1,9 +1,9 @@
 <?php
-namespace KeysShop\Apps\Products\Models;
+namespace Apps\Products\Models;
 
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Model\CustomDateTime;
+use Apps\Products\Models\ProductModel;
+use Includes\Model\BaseModel;
+use Includes\Model\CustomDateTime;
 
 class KeyModel extends BaseModel {
     public int $field_product_id;
@@ -29,22 +29,7 @@ class KeyModel extends BaseModel {
         'created_at' => 'DateTime',
         'bought_at'  => 'DateTime',
     ];
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id          INT AUTO_INCREMENT PRIMARY KEY,
-            product_id  INT NOT NULL,
-            key_code    VARCHAR(255) NOT NULL,
-            price       FLOAT NOT NULL,
-            original_price FLOAT NOT NULL,
-            order_id    INT NULL,
-
-            bought_at   TIMESTAMP NULL,
-            created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-            FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
-        );');
-        return $result;
-    }
+    
     static protected $additional_fields = array(
         [
             'field' => [

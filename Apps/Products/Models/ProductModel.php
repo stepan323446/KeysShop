@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Products\Models;
+namespace Apps\Products\Models;
 
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Model\CustomDateTime;
+use Includes\Model\BaseModel;
+use Includes\Model\CustomDateTime;
 
 class ProductModel extends BaseModel {
     public string $field_title;
@@ -134,32 +134,6 @@ class ProductModel extends BaseModel {
     }
     public function get_absolute_url() {
         return get_permalink('products:single', [$this->field_slug]);
-    }
-
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id          INT AUTO_INCREMENT PRIMARY KEY,
-            title       VARCHAR(50) NOT NULL,
-            slug        VARCHAR(50) NOT NULL,
-            excerpt     VARCHAR(250) NOT NULL,
-            poster_url   VARCHAR(255) NULL,
-            image_url   VARCHAR(255) NULL,
-
-            description TEXT NOT NULL,
-            original_url VARCHAR(255) NOT NULL,
-            original_price FLOAT NOT NULL,
-            edition     VARCHAR(50) DEFAULT "Standart edition",
-            sales       INT DEFAULT 0,
-
-            created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            platform_id INT NOT NULL,
-            region_id   INT NOT NULL,
-
-            FOREIGN KEY (platform_id) REFERENCES taxonomies(id) ON DELETE RESTRICT,
-            FOREIGN KEY (region_id) REFERENCES taxonomies(id) ON DELETE RESTRICT
-        );');
-        return $result;
     }
 
     public function valid() {

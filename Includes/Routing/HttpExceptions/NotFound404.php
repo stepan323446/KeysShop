@@ -1,6 +1,6 @@
 <?php
 
-namespace KeysShop\Includes\Routing\HttpExceptions;
+namespace Includes\Routing\HttpExceptions;
 
 class NotFound404 extends PageError
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace KeysShop\Includes\Routing;
+namespace Includes\Routing;
 
-use KeysShop\Includes\Routing\Path;
-use KeysShop\Includes\BaseController;
-use KeysShop\Includes\Routing\HttpExceptions;
+use Includes\Routing\Path;
+use Includes\BaseController;
+use Includes\Routing\HttpExceptions;
 
 class Router
 {

@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Contacts\Models;
+namespace Apps\Contacts\Models;
 
-use KeysShop\Includes\Model\BaseModel;
-use KeysShop\Includes\Model\CustomDateTime;
+use Includes\Model\BaseModel;
+use Includes\Model\CustomDateTime;
 
 class FeedbackModel extends BaseModel {
     public string $field_name;
@@ -21,17 +21,6 @@ class FeedbackModel extends BaseModel {
     ];
     static protected $search_fields = ['obj.name', 'obj.email'];
 
-    public static function init_table() {
-        $result = db_query('CREATE TABLE ' . static::$table_name . ' (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL,
-            email VARCHAR(50) NOT NULL,
-            content TEXT NOT NULL,
-            is_read TINYINT(1) DEFAULT 0,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );');
-        return $result;
-    }
     public function valid() {
         $errors = array();
 

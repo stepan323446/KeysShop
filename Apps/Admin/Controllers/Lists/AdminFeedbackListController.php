@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Lists;
+namespace Apps\Admin\Controllers\Lists;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminListController;
+use Apps\Admin\Controllers\Abstract\AdminListController;
 
 class AdminFeedbackListController extends AdminListController {
-    protected string $model_сlass_name = "KeysShop\Apps\Contacts\Models\FeedbackModel";
+    protected string $model_сlass_name = "Apps\Contacts\Models\FeedbackModel";
     protected array $table_fields = array(
         'Name' => 'field_name',
         'E-mail' => 'field_email',

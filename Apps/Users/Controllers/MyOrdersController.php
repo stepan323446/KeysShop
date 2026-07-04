@@ -1,11 +1,11 @@
 <?php
-namespace KeysShop\Apps\Users\Controllers;
+namespace Apps\Users\Controllers;
 
-use KeysShop\Apps\Products\Models\{
+use Apps\Products\Models\{
     KeyModel,
     ProductModel
 };
-use KeysShop\Includes\BaseController;
+use Includes\BaseController;
 
 
 define('MAX_ORDER_PER_PAGE', 20);

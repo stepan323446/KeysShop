@@ -1,10 +1,10 @@
 <?php
-namespace KeysShop\Apps\Admin\Controllers\Lists;
+namespace Apps\Admin\Controllers\Lists;
 
-use KeysShop\Apps\Admin\Controllers\Abstract\AdminListController;
+use Apps\Admin\Controllers\Abstract\AdminListController;
 
 class AdminTaxonomyListController extends AdminListController {
-    protected string $model_сlass_name = "KeysShop\Apps\Products\Models\TaxonomyModel";
+    protected string $model_сlass_name = "Apps\Products\Models\TaxonomyModel";
     protected array $table_fields = array(
         'Name' => 'field_name',
         'Slug' => 'field_slug',

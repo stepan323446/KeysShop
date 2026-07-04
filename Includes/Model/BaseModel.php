@@ -1,6 +1,6 @@
 <?php
 
-namespace KeysShop\Includes\Model;
+namespace Includes\Model;
 
 use mysqli_result;
 

@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Ajax\Controllers;
+namespace Apps\Ajax\Controllers;
 
 use Exception;
-use KeysShop\Includes\BaseController;
+use Includes\BaseController;
 
 class AjaxController extends BaseController {
     protected string $template_name = APPS_PATH . '/Ajax/Templates/ajax-result.php';

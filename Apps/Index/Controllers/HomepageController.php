@@ -1,8 +1,8 @@
 <?php
-namespace KeysShop\Apps\Index\Controllers;
+namespace Apps\Index\Controllers;
 
-use KeysShop\Apps\Products\Models\ProductModel;
-use KeysShop\Includes\BaseController;
+use Apps\Products\Models\ProductModel;
+use Includes\BaseController;
 
 require_once APPS_PATH . '/Products/components.php';
 

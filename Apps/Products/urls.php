@@ -1,10 +1,10 @@
 <?php
 
-use KeysShop\Apps\Products\Controllers\{
+use Apps\Products\Controllers\{
     CatalogController,
     SingleProductController
 };
-use KeysShop\Includes\Routing\Path;
+use Includes\Routing\Path;
 
 
 $product_urls = [
