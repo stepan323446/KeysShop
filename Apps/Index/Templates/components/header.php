@@ -1,5 +1,6 @@
 
 <?php
+require_once APPS_PATH . '/Index/components.php';
 $cart_info = get_cart_information();
 ?>
 
