@@ -18,7 +18,8 @@ define('DB_AUTH', array(
     'db_name'       => '<YOUR_DATABASE_NAME>',
     'db_host'       => '<YOUR_DATABASE_HOST>',
     'db_username'   => '<YOUR_USERNAME>',
-    'db_password'   => '<YOUR_PASSWORD>'
+    'db_password'   => '<YOUR_PASSWORD>',
+    'db_charset'    => '<YOUR_DB_CHARSET>'
 ));
 
 // A warning message for the entire site

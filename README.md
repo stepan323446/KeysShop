@@ -33,14 +33,17 @@ The project is organized as follows:
 
 - `apps/` - Contains all mini-applications.
   - `{app_name}/` - A single mini-application.
-    - `templates/` - Page views.
+    - `Templates/` - Page views.
       - `components/` - Views for individual components.
+    - `Models/` - Models with relation DB.
+        - `{model_name}`
+    - `Controllers/` - Controllers to display views or other output logic
+        - `{controller_name}`
     - `components.php` - Functions for handling the logic and rendering of specific components.
     - `functions.php` *(optional)* - Utility functions specific to the application.
-    - `models.php` - Models for creating and managing objects.
     - `urls.php` - Defines an array of routes that map to controllers for rendering pages. These routes are later linked to the root `urls.php`.
 - `assets/` - Static files such as JavaScript, CSS, and images.
-- `includes/` - Core PHP scripts and libraries.
+- `Includes/` - Core PHP scripts and libraries.
 - `media/` - Uploaded files stored on the server.
 - `.htaccess` - Configuration file for the web server (e.g., URL rewriting).
 - `config-default.php` - A template configuration file. Can be used as a base to create `config.php`.
@@ -65,9 +68,9 @@ The `BaseModel` class is responsible for managing data stored and processed on t
 
 - `public $field_{column_name}`: Public fields corresponding to the current table's columns, which will later be accessible.
 - `static protected $table_name`: The name of the database table.
-- `static protected $table_fields`: Specifies the fields and their data types (`int`, `string`, `bool`, or `DateTime`):
+- `static protected array $table_fields`: Specifies the fields and their data types (`int`, `string`, `bool`, or `DateTime`):
 ```php
-static protected $table_fields = [
+static protected array $table_fields = [
     'id'            => 'int',
     'user_id'       => 'int',
     'recovery_slug' => 'string',

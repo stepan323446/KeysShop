@@ -1,0 +1,21 @@
+{
+    "name": "steve-dekart/keys-shop",
+    "autoload": {
+        "psr-4": {
+            "KeysShop\\Apps\\": "Apps/",
+            "KeysShop\\Includes\\": "Includes/"
+        },
+        "files": [
+            "functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Stepan",
+            "email": "stevedekart2020@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
+}

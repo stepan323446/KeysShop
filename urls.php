@@ -1,22 +1,23 @@
 <?php
-require INCLUDES_PATH . '/router.php';
-require APPS_PATH . '/index/urls.php';
-require APPS_PATH . '/contacts/urls.php';
-require APPS_PATH . '/products/urls.php';
-require APPS_PATH . '/users/urls.php';
-require APPS_PATH . '/admin/urls.php';
-require APPS_PATH . '/ajax/urls.php';
-require APPS_PATH . '/order/urls.php';
 
-require_once APPS_PATH . '/index/controllers.php';
+use KeysShop\Apps\Index\Controllers\ErrorController;
+use KeysShop\Includes\Routing\Router;
+
+require APPS_PATH . '/Index/urls.php';
+require APPS_PATH . '/Products/urls.php';
+require APPS_PATH . '/Users/urls.php';
+require APPS_PATH . '/Order/urls.php';
+require APPS_PATH . '/Ajax/urls.php';
+require APPS_PATH . '/Contacts/urls.php';
+require APPS_PATH . '/Admin/urls.php';
 
 Router::includes($index_urls, "index");
 Router::includes($product_urls, 'products');
-Router::includes($contacts_urls, 'contacts');
 Router::includes($users_urls, 'users');
-Router::includes($admin_urls, 'admin');
-Router::includes($ajax_urls, 'ajax');
 Router::includes($order_urls, 'order');
+Router::includes($ajax_urls, 'ajax');
+Router::includes($contacts_urls, 'contacts');
+Router::includes($admin_urls, 'admin');
 
 Router::set_error_controller('default', new ErrorController())
 ?>

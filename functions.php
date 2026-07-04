@@ -1,6 +1,17 @@
 <?php
 // For the_footer() and get_footer()
-require_once APPS_PATH . '/index/components.php';
+
+use KeysShop\Apps\Products\Models\ProductModel;
+use KeysShop\Apps\Users\Models\UserModel;
+use KeysShop\Includes\Routing\Router;
+
+
+function the_header(string $title, string $description, $body_class = '', $meta_tags = array()) {
+    include APPS_PATH . '/Index/Templates/components/header.php';
+}
+function the_footer($scripts = array()) {
+    include APPS_PATH . '/Index/Templates/components/footer.php';
+}
 
 /**
  * Get dynamic link using Router
@@ -31,13 +42,12 @@ function the_GET_request($GET) {
 
 /**
  * Secure string output (XSS attacks)
- * @param string $str
  * @return void
  */
-function the_safe($str) {
+function the_safe(?string $str) {
     echo get_the_safe($str);
 }
-function get_the_safe($str) {
+function get_the_safe(?string $str) {
     return htmlspecialchars($str);
 }
 /**
@@ -103,7 +113,7 @@ function calc_page_offset($limit, $page) {
     }
     return ($page - 1) * $limit;
 }
-function the_pagination($count, $elem_per_page, $current_page) {
+function the_pagination(int $count, int $elem_per_page, int $current_page) {
     if($count == 0)
         return;
 
@@ -154,10 +164,9 @@ function get_title_website($page_title) {
  * Get current user id and username. If user is not authorized - false
  * @return UserModel|false
  */
-require_once APPS_PATH . '/users/models.php';
 function get_auth_user() {
 
-    $user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'] ?? null;
 
     if(isset($user_id))
     {
@@ -184,7 +193,6 @@ function set_auth_user($user_id) {
     $_SESSION['user_id'] = $user_id;
 }
 
-require_once APPS_PATH . '/products/models.php';
 function get_cart_information() {
     $result = array();
     $result['products'] = array();
@@ -236,7 +244,7 @@ function get_cart_information() {
 
     return $result;
 }
-function set_order_data($cart_information) {
+function set_order_data(array $cart_information) {
     $_SESSION['order'] = $cart_information;
 }
 function get_order_data() {
@@ -259,10 +267,7 @@ function generate_uuid() {
     );
 }
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-function send_email($subject, $body, $altBody, $to_address, $to_name) {
+function send_email(string $subject, string $body, string $altBody, string $to_address, string $to_name) {
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();

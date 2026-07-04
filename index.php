@@ -1,20 +1,19 @@
 <?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use KeysShop\Includes\Routing\Router;
+
 define('BASE_PATH', __DIR__);
-define('APPS_PATH', BASE_PATH . '/apps');
-define('INCLUDES_PATH', BASE_PATH . '/includes');
+define('APPS_PATH', BASE_PATH . '/Apps');
+define('INCLUDES_PATH', BASE_PATH . '/Includes');
 
-require BASE_PATH . '/functions.php';
-require BASE_PATH . '/config.php';
-require BASE_PATH . '/db.php';
-
-// PHPMailer
-// https://github.com/PHPMailer/PHPMailer
-require BASE_PATH . '/includes/PHPMailer/src/PHPMailer.php';
-require BASE_PATH . '/includes/PHPMailer/src/SMTP.php';
-require BASE_PATH . '/includes/PHPMailer/src/Exception.php';
+require_once BASE_PATH . '/functions.php';
+require_once BASE_PATH . '/config.php';
+require_once BASE_PATH . '/db.php';
 
 
-define('ASSETS_PATH', HOME_URL . '/assets');
+define('ASSETS_PATH', HOME_URL . '/Assets');
 define('CURRENT_USER', get_auth_user());
 
 date_default_timezone_set(SERVER_TIMEZONE);
