@@ -58,7 +58,7 @@
                 </div>
                 <div class="footer-social-links">
                     <a target="_blank" href="https://steve-dekart.xyz/">Website</a> |
-                    <a target="_blank" href="#">GitHub</a> |
+                    <a target="_blank" href="https://github.com/stepan323446/KeysShop">GitHub</a> |
                     <a target="_blank" href="https://www.linkedin.com/in/stepan-turitsin-009354243/">LinkedIn</a>
                 </div>
             </div>
