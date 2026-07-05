@@ -1,5 +1,7 @@
 <?php
+namespace Apps\Users\Models;
 
+use DateTime;
 use Includes\Model\BaseModel;
 use Includes\Model\CustomDateTime;
 
@@ -42,7 +44,7 @@ class RecoveryPassModel extends BaseModel {
      * Check if the email was sent 10 minutes earlier. If so, the user needs to wait for the cooldown.
      * @return bool
      */
-    public static function is_cooldown_available($user_id) {
+    public static function is_cooldown_available(int $user_id) {
         $cooldownTime = new DateTime();
         $cooldownTime->modify( '-' . static::$cooldownModifier);
 

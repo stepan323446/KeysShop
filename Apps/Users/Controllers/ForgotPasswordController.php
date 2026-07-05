@@ -2,10 +2,10 @@
 
 namespace Apps\Users\Controllers;
 
+use Apps\Users\Models\RecoveryPassModel;
 use Exception;
 use Apps\Users\Models\UserModel;
 use Includes\BaseController;
-use RecoveryPassModel;
 
 
 
