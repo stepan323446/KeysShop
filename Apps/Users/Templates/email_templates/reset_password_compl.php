@@ -1,3 +1,5 @@
+<?php require_once APPS_PATH . '/Index/components.php'; ?>
+
 <?php the_email_header($preheader) ?>
 
 <p>Hi <?php echo $username ?>,</p>

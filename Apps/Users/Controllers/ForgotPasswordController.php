@@ -20,6 +20,7 @@ class ForgotPasswordController extends BaseController {
         }
     }
     protected function post() {
+        require_once APPS_PATH . '/Users/functions.php';
         $email = $_POST['email'];
         if(!isset($email)) {
             $this->context['error_message'] = 'Enter your e-mail address';
