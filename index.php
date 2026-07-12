@@ -1,5 +1,4 @@
 <?php
-
 require __DIR__ . '/vendor/autoload.php';
 
 use Includes\Routing\Router;
@@ -9,6 +8,10 @@ define('APPS_PATH', BASE_PATH . '/Apps');
 define('INCLUDES_PATH', BASE_PATH . '/Includes');
 
 require_once BASE_PATH . '/config.php';
+
+if(!DEBUG_MODE)
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_WARNING);
+
 require_once BASE_PATH . '/db.php';
 
 

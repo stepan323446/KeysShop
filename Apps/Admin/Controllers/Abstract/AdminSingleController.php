@@ -128,7 +128,7 @@ class AdminSingleController extends AdminBaseController {
                 case 'image':
                     $file = $_FILES[$field['model_field']];
                     if(isset($file)) {
-                        $path = upload_file($file, $this->model_сlass_name . '/', 'image');
+                        $path = upload_file($file, $object->get_table_name() . '/', 'image');
 
                         if(!empty($path)) {
                             $field_value = $path;

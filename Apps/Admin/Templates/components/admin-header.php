@@ -3,6 +3,8 @@
  * @var int $feedback_count 
 */
 use Includes\Routing\Router;
+
+require_once APPS_PATH . '/Index/components.php';
 ?>
 
 <!DOCTYPE html>
